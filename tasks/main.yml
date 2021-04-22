@@ -12,5 +12,8 @@
   failed_when: false
   when: openstack_exporter__version_check|bool
 
+- name: create user and group
+  ansible.builtin.include_tasks: users.yml
+
 - name: download and install openstack exporter
   ansible.builtin.include_tasks: install.yml

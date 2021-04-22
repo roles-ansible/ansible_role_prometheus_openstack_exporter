@@ -24,6 +24,8 @@
       ansible.builtin.unarchive:
         src: "/tmp/{{ openstack_exporter__filename }}.tar.gz"
         dest: '/opt/openstack-exporter'
+        owner: "{{ openstack_exporter__user }}"
+        group: "{{ openstack_exporter__group }}"
         remote_src: true
 
     - name: deploy new openstack_exporter binary
@@ -32,7 +34,7 @@
         src: "/opt/openstack-exporter/{{ openstack_exporter__filename }}/openstack-exporter"
         remote_src: true
         dest: '/usr/local/bin/openstack-exporter'
-        owner: 'root'
-        group: 'root'
+        owner: "{{ openstack_exporter__user }}"
+        group: "{{ openstack_exporter__group }}"
         mode: '0755'
   when: (not openstack_exporter__version_check|bool) or (not ansible_check_mode and (openstack_exporter__active_version.stdout != openstack_exporter__version))

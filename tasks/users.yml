@@ -1,0 +1,14 @@
+---
+- name: add openstack exporter group
+  become: true
+  ansible.builtin.group:
+    name: "{{ openstack_exporter__group }}"
+    system: true
+    state: 'present'
+
+- name: create openstack exporter user
+  become: true
+  ansible.builtin.user:
+    name: "{{ openstack_exporter__user }}"
+    comment: "Openstack Exporter user"
+    system: true

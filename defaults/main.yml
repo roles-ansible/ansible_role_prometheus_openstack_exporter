@@ -4,6 +4,10 @@ openstack_exporter__releases: "https://github.com/openstack-exporter/openstack-e
 openstack_exporter__filename: "openstack-exporter-{{ openstack_exporter__version }}.linux-{{ _arch }}"
 openstack_exporter__checksum: 'sha256sums.txt'
 
+
+openstack_exporter__user: 'openstackexporter'
+openstack_exporter__group: 'openstackexporter'
+
 openstack_exporter__version_check: true
 
 # should we do a version check? (recomended)
