@@ -1,5 +1,13 @@
-# ansible_role_template
-Template for Ansible roles
+ ansible_role_prometheus_openstack_exporter
+============================================
+Ansible role to deploy the [https://github.com/openstack-exporter/openstack-exporter.git](https://github.com/openstack-exporter/openstack-exporter.git).
+
+```
+ATTENTION
+
+WORK IN PROGRESS - EVERYTHING CAN CHANGE ANYTIME!!!
+```
+
 
  Testing
 ----------
