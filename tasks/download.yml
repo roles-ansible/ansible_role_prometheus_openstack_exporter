@@ -1,0 +1,19 @@
+---
+- block:
+  - name: Download latest release
+    ansible.builtin.get_url:
+      url: "{{ openstack_exporter__releases }}/{{openstack_exporter__archive }}"
+      dest: "/tmp/{{ openstack_exporter__archive }}"
+      checksum: "sha256:{{ openstack_exporter__releases }}/{{ openstack_exporter__checksum }}"
+    register: _download_archive
+    until: _download_archive is succeeded
+    retries: 5
+    delay: 2
+
+  - name: unarchive openstack_exporter
+    become: true
+    ansible.builtin.unarchive:
+      src: "/tmp/{{ openstack_exporter__archive }}"
+      dest: '/opt/openstack-exporter'
+      remote_src: true
+

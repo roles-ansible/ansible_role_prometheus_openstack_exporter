@@ -1,3 +1,8 @@
 ---
-- include_tasks: versioncheck.yml
+- name: include optional versionscheck
+  ansible.builtin.include_tasks: versioncheck.yml
   when: submodules_versioncheck|bool
+
+- name: download openstack exporter
+  ansible.builtin.include_tasks: download.yml
+
