@@ -8,6 +8,8 @@ ATTENTION
 WORK IN PROGRESS - EVERYTHING CAN CHANGE ANYTIME!!!
 ```
 
+important: the clouds.yml file will be deployed with this role too!
+
 
  Testing
 ----------

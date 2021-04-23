@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=golang openstack exporter service
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/openstack-exporter --web.listen-address=":${OPENSTACK_EXPORTER__PROJECT_PORT}" ${OPENSTACK_EXPORTER__PROJECT_NAME}
+User={{ openstack_exporter__user }}
+Group={{ openstack_exporter__group }}
+Environment="BUILDUP_RUN_BY_SYSTEMD=1"
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

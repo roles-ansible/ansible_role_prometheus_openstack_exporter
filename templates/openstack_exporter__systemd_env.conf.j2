@@ -1,0 +1,7 @@
+{{ ansible_managed | comment }}
+
+[Service]
+Environment="OPENSTACK_EXPORTER__PROJECT_NAME={{ item['project'] }}"
+Environment="OPENSTACK_EXPORTER__PROJECT_PORT={{ item['port'] }}"
+
+Restart=on-failure

@@ -1,0 +1,42 @@
+---
+- name: create openstack_exporter project list
+  set_fact:
+    openstack_exporter__projects: |
+        {% set projects = [] -%}
+        {% for key in openstack_exporter__clouds.clouds.keys() -%}
+            {% set ignored = projects.extend([{'project': key, 'port': loop.index | int + openstack_exporter__first_port | int }]) -%}
+        {%- endfor %}
+        {{ projects }}
+  no_log: "{{ openstack_exporter__no_log|bool }}"
+
+- name: create directories for systemd unit drop in file
+  become: true
+  ansible.builtin.file:
+    path: "/etc/systemd/system/openstack_exporter@{{ item['project'] }}.service.d/"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  with_items: "{{ openstack_exporter__projects }}"
+  notify: systemctl restart openstack_exporter
+
+- name: install systemd unit drop ins
+  become: true
+  ansible.builtin.template:
+    src: 'templates/openstack_exporter__systemd_env.conf.j2'
+    dest: "/etc/systemd/system/openstack_exporter@{{ item['project'] }}.service.d/env.conf"
+    owner: 'root'
+    group: 'root'
+    mode: '0640'
+  with_items: "{{ openstack_exporter__projects }}"
+  notify: systemctl restart openstack_exporter
+
+- name: Copy the openstack_exporter systemd service file
+  become: true
+  ansible.builtin.template:
+    src: 'templates/openstack_exporter@.service.j2'
+    dest: '/etc/systemd/system/openstack_exporter@.service'
+    owner: root
+    group: root
+    mode: 0644
+  notify: systemctl restart openstack_exporter

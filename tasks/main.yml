@@ -20,3 +20,8 @@
 
 - name: deploy openstack config
   ansible.builtin.include_tasks: config.yml
+  when: openstack_exporter__write_clouds_yaml|bool
+
+- name: create systemd service
+  ansible.builtin.include_tasks: systemd.yml
+  when: openstack_exporter__systemd|bool
