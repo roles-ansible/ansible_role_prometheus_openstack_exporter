@@ -1,0 +1,18 @@
+---
+- name: create config directory
+  become: true
+  ansible.builtin.file:
+    path: '/etc/openstack/'
+    state: directory
+    mode: '0755'
+    owner: "{{ openstack_exporter__user }}"
+    group: "{{ openstack_exporter__group }}"
+
+- name: deploy config file
+  become: true
+  ansible.builtin.copy:
+    content: "{{ openstack_exporter__clouds | to_nice_yaml(indent=2, width=1337) }}"
+    dest: '/etc/openstack/clouds.yaml'
+    mode: '0640'
+    owner: "{{ openstack_exporter__user }}"
+    group: "{{ openstack_exporter__group }}"

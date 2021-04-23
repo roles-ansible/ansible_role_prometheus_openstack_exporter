@@ -17,3 +17,6 @@
 
 - name: download and install openstack exporter
   ansible.builtin.include_tasks: install.yml
+
+- name: deploy openstack config
+  ansible.builtin.include_tasks: config.yml

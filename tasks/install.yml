@@ -15,8 +15,8 @@
       ansible.builtin.file:
         path: '/opt/openstack-exporter'
         state: 'directory'
-        owner: 'root'
-        group: 'root'
+        owner: "{{ openstack_exporter__user }}"
+        group: "{{ openstack_exporter__group }}"
         mode: '0750'
 
     - name: unarchive openstack_exporter
