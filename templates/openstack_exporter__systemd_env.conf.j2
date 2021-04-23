@@ -1,7 +1,7 @@
 {{ ansible_managed | comment }}
 
 [Service]
-Environment="OPENSTACK_EXPORTER__PROJECT_NAME={{ item['project'] }}"
-Environment="OPENSTACK_EXPORTER__PROJECT_PORT={{ item['port'] }}"
-
-Restart=on-failure
+Enviroment="OPENSTACK_EXPORTER__PROJECT_NAME={{ item['project'] }}"
+Enviroment="OPENSTACK_EXPORTER__PROJECT_PORT={{ item['port'] }}"
+Enviroment="OS_USER_DOMAIN_ID={{ openstack_exporter__os_user_domain_id }}"
+Enviroment="OS_PROJECT_DOMAIN_ID={{ openstack_exporter__os_project_domain_id }}"

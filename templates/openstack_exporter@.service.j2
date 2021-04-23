@@ -6,12 +6,12 @@ After=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/openstack-exporter --web.listen-address=":${OPENSTACK_EXPORTER__PROJECT_PORT}" ${OPENSTACK_EXPORTER__PROJECT_NAME}
-User={{ openstack_exporter__user }}
-Group={{ openstack_exporter__group }}
-Environment="BUILDUP_RUN_BY_SYSTEMD=1"
+ExecStart=/usr/local/bin/openstack-exporter ${OPENSTACK_EXPORTER__PROJECT_NAME} \
+  --web.listen-address="0.0.0.0:${OPENSTACK_EXPORTER__PROJECT_PORT}" \
+  {{ openstack_exporter__extra_arguments }}
 Restart=always
 RestartSec=1
+StartLimitInterval=0
 
 [Install]
 WantedBy=multi-user.target

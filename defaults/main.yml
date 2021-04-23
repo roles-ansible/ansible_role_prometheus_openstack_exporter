@@ -18,5 +18,9 @@ openstack_exporter__write_clouds_yaml: true
 openstack_exporter__first_port: 9123
 openstack_exporter__no_log: true
 
+openstack_exporter__extra_arguments: ''
+
+openstack_exporter__os_user_domain_id: 'default'
+openstack_exporter__os_project_domain_id: 'default'
 # should we do a version check? (recomended)
 submodules_versioncheck: false
