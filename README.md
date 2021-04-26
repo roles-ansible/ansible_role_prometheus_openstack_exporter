@@ -1,4 +1,7 @@
- ansible_role_prometheus_openstack_exporter
+[![Galaxy](https://raw.githubusercontent.com/roles-ansible/ansible_role_prometheus_openstack_exporter/main/.github/galaxy.svg)](https://galaxy.ansible.com/do1jlr/prometheus_openstack_exporter)
+[![License](https://raw.githubusercontent.com/roles-ansible/ansible_role_prometheus_openstack_exporter/main/.github/license.svg)](https://github.com/roles-ansible/ansible_role_prometheus_openstack_exporter/blob/main/LICENSE)
+
+ansible_role_prometheus_openstack_exporter
 ============================================
 Ansible role to deploy the [https://github.com/openstack-exporter/openstack-exporter.git](https://github.com/openstack-exporter/openstack-exporter.git).
 
