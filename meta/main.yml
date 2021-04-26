@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: prometheus_openstack_exporter
+  author: do1jlr
+  description: Ansible role to deploy a openstack-exporter and start it with systemd and tmux
+  license: "MIT"
+  min_ansible_version: 2.10
+  github_branch: main
+  platforms:
+    - name: Archlinux
+      versions: all
+    - name: Debian
+      versions: all
+    - name: Ubuntu
+      versions: all
+    - name: Fedora
+      versions: all
+  galaxy_tags:
+    - prometheus
+    - openstack
+    - golang
+    - exporter
+dependencies: []
