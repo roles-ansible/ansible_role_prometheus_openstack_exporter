@@ -2,37 +2,50 @@
 ============================================
 Ansible role to deploy the [https://github.com/openstack-exporter/openstack-exporter.git](https://github.com/openstack-exporter/openstack-exporter.git).
 
+Theoretically, the exporter should run in a Systemd session without much effort. But since I somehow didn't get that error free it is now nested in a tmux session. A bit ugly, but at least it works.
+
+Improvements are very very welcome!
+
+ What do you need to get ir running?
+------------------------------------
+What is absolutely needed is the clouds.yaml configuration.
+Please put it in the ``openstack_exporter__clouds`` variable like this:
+```yaml
+openstack_exporter__clouds:
+  clouds:
+    default:
+      region_name: {{ openstack_region_name }}
+      identity_api_version: 3
+      identity_interface: internal
+      auth:
+        username: {{ keystone_admin_user }}
+        password: {{ keystone_admin_password }}
+        project_name: {{ keystone_admin_project }}
+        project_domain_name: 'Default'
+        user_domain_name: 'Default'
+        auth_url: {{ admin_protocol }}://{{ kolla_internal_fqdn }}:{{ keystone_admin_port }}/v3
 ```
-ATTENTION
 
-WORK IN PROGRESS - EVERYTHING CAN CHANGE ANYTIME!!!
-```
+By default the clouds: content will be deployed to ``/etc/openstack/clouds.yaml``
 
-important: the clouds.yml file will be deployed with this role too!
+ Variables
+-----------
 
-
- Testing
-----------
-This role is tested with [these github-action](https://github.com/search?q=topic%3Acheck-ansible+topic%3Agithub-actions+org%3Aroles-ansible&type=Repositories) tests for different versions of differen linux systems. Linting is tested via travis-ci and the  [ansible-lint action](https://github.com/marketplace/actions/ansible-lint).
-If you want to find out more about our tests, please have a look at the github marketplace.
-
-| test status | Github Marketplace |
-| :---------  | :----------------  |
-| [![Ansible Lint check](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20Lint%20check/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+Lint+check%22) | [ansible-lint action](https://github.com/marketplace/actions/ansible-lint) |
-| ![Yamllint GitHub Actions](https://github.com/roles-ansible/ansible_role_template/workflows/Yamllint%20GitHub%20Actions/badge.svg) |  [yamllint gitHub actions](https://github.com/marketplace/actions/yamllint-github-action) |
-| | |
-| [![Ansible check debian:stable](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20debian:stable/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+debian%3Astable%22) | [ansible test with debian stable](https://github.com/marketplace/actions/check-ansible-debian-stable) |
-| [![Ansible check debian:latest](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20debian:latest/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+debian%3Alatest%22) | [ansible test with debian latest](https://github.com/marketplace/actions/check-ansible-debian-latest) |
-| [![Ansible check debian:sid](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20debian:sid/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+debian%3Asid%22) | [ansible test with debian sid](https://github.com/marketplace/actions/check-ansible-debian-sid) |
-| [![Ansible check debian:buster](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20debian:buster/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+debian%3Abuster%22) | [ansible test with debian buster](https://github.com/marketplace/actions/check-ansible-debian-buster) |
-| [![Ansible check debian:stretch](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20debian:stretch/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+debian%3Astretch%22) | [ansible test with debian stretch](https://github.com/marketplace/actions/check-ansible-debian-stretch) |
-| | |
-| [![Ansible check archlinux:latest](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20archlinux:latest/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+archlinux%3Alatest%22) | [ansible test with archlinux latest](https://github.com/marketplace/actions/check-ansible-archlinux-latest) |
-| | |
-| [![Ansible check ubuntu:latest](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20ubuntu:latest/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+ubuntu%3Alatest%22) | [ansible test with ubuntu latest](https://github.com/marketplace/actions/check-ansible-ubuntu-latest) |
-| [![Ansible check ubuntu:bionic](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20ubuntu:bionic/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+ubuntu%3Abionic%22) | [ansible test with ubuntu bionic](https://github.com/marketplace/actions/check-ansible-ubuntu-bionic) |
-| [![Ansible check ubuntu:trusty](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20ubuntu:trusty/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+ubuntu%3Atrusty%22) | [ansible test with ubuntu trusty](https://github.com/marketplace/actions/check-ansible-ubuntu-trusty) |
-| | |
-| [![Ansible check centos:latest](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20centos:latest/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+centos%3Alatest%22) | [ansible test with centos latest](https://github.com/marketplace/actions/check-ansible-centos-latest) |
-| [![Ansible check centos:centos8](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20centos:centos8/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+centos%3Acentos8%22) | [ansible test with centos centos8](https://github.com/marketplace/actions/check-ansible-centos-centos8) |
-| [![Ansible check centos:latest](https://github.com/roles-ansible/ansible_role_template/workflows/Ansible%20check%20centos:centos7/badge.svg)](https://github.com/roles-ansible/ansible_role_template/actions?query=workflow%3A%22Ansible+check+centos%3Acentos7%22) | [ansible test with centos centos7](https://github.com/marketplace/actions/check-ansible-centos-centos7) |
+| vaiable name | default value | description |
+| ------------ | ------------- | ----------- |
+| openstack_exporter__version: | ``'1.3.0'`` | the current used version of the openstack_exporter |
+| openstack_exporter__releases: | *(see [defaults/main.yml](defaults/main.yml))* | the Download path of the released go binary |
+| openstack_exporter__filename: | "openstack-exporter-{{ openstack_exporter__version }}.linux-{{ _arch }}" | the filename used to find and store the binary |
+| openstack_exporter__checksum: | 'sha256sums.txt' | The filename of the sha256sums of the released binarys |
+| openstack_exporter__user: | 'openstackexporter' | The user to run the openstack_exporter with |
+| openstack_exporter__group: | 'openstackexporter' | The group to run the openstacl_exporter with |
+| openstack_exporter__version_check: | ``true`` | Check if installed version != ``openstack_exporter__version`` before initiating binary download |
+| openstack_exporter__systemd: | ``true`` | run systemd tasks *(currently the only option)* |
+| openstack_exporter__clouds:  | ``clouds: {}`` | as described earlier the variable for the openstack clouds.yaml config |
+| openstack_exporter__write_clouds_yaml: | ``true`` | deploy the ``/etc/openstack/clouds.yaml`` with this ansible role |
+| openstack_exporter__first_port: | ``9123`` | first port we use to listen for the openstack exporter *(off by 1)* |
+| openstack_exporter__no_log: | ``true`` | hide secrets from log |
+| openstack_exporter__extra_arguments: | '' | optional additional parameter to start openstack-exporter with |
+| openstack_exporter__os_user_domain_id: | 'default' | os_user_domain_id variable |
+| openstack_exporter__os_project_domain_id: | 'default' | os_project_domain_id variable |
+| submodules_versioncheck: | ``false`` | run optional versionscheck (true is recomended) |

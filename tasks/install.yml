@@ -38,3 +38,9 @@
         group: "{{ openstack_exporter__group }}"
         mode: '0755'
   when: (not openstack_exporter__version_check|bool) or (not ansible_check_mode and (openstack_exporter__active_version.stdout != openstack_exporter__version))
+
+- name: install tmux
+  become: true
+  ansible.builtin.package:
+    name: tmux
+    state: present
