@@ -9,7 +9,7 @@ Theoretically, the exporter should run in a Systemd session without much effort.
 
 Improvements are very very welcome!
 
- What do you need to get ir running?
+ What do you need to get it running?
 ------------------------------------
 What is absolutely needed is the clouds.yaml configuration.
 Please put it in the ``openstack_exporter__clouds`` variable like this:
@@ -52,3 +52,6 @@ By default the clouds: content will be deployed to ``/etc/openstack/clouds.yaml`
 | openstack_exporter__os_user_domain_id: | 'default' | os_user_domain_id variable |
 | openstack_exporter__os_project_domain_id: | 'default' | os_project_domain_id variable |
 | submodules_versioncheck: | ``false`` | run optional versionscheck (true is recomended) |
+
+## Other Tips
+There is an example Dashboard in the ``.github`` Folder. ANother one that may work is the [9701](https://grafana.com/grafana/dashboards/9701) Dashboard.
