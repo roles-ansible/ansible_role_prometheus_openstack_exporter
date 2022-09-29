@@ -1,16 +1,19 @@
 ---
-- block:
+- name: Download and install go binary
+  when: (not openstack_exporter__version_check | bool) or (not ansible_check_mode and (openstack_exporter__active_version.stdout != openstack_exporter__version))
+  block:
     - name: Download latest release
       ansible.builtin.get_url:
         url: "{{ openstack_exporter__releases }}/{{ openstack_exporter__filename }}.tar.gz"
         dest: "/tmp/{{ openstack_exporter__filename }}.tar.gz"
         checksum: "sha256:{{ openstack_exporter__releases }}/{{ openstack_exporter__checksum }}"
+        mode: 0640
       register: _download_archive
       until: _download_archive is succeeded
       retries: 5
       delay: 2
 
-    - name: mkdir /opt/openstack-exporter
+    - name: Run mkdir /opt/openstack-exporter
       become: true
       ansible.builtin.file:
         path: '/opt/openstack-exporter'
@@ -19,7 +22,7 @@
         group: "{{ openstack_exporter__group }}"
         mode: '0750'
 
-    - name: unarchive openstack_exporter
+    - name: Unarchive openstack_exporter
       become: true
       ansible.builtin.unarchive:
         src: "/tmp/{{ openstack_exporter__filename }}.tar.gz"
@@ -28,7 +31,7 @@
         group: "{{ openstack_exporter__group }}"
         remote_src: true
 
-    - name: deploy new openstack_exporter binary
+    - name: Deploy new openstack_exporter binary
       become: true
       ansible.builtin.copy:
         src: "/opt/openstack-exporter/{{ openstack_exporter__filename }}/openstack-exporter"
@@ -37,9 +40,8 @@
         owner: "{{ openstack_exporter__user }}"
         group: "{{ openstack_exporter__group }}"
         mode: '0755'
-  when: (not openstack_exporter__version_check|bool) or (not ansible_check_mode and (openstack_exporter__active_version.stdout != openstack_exporter__version))
 
-- name: install tmux
+- name: Install tmux
   become: true
   ansible.builtin.package:
     name: tmux
