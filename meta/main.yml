@@ -5,6 +5,8 @@ galaxy_info:
   description: Ansible role to deploy a openstack-exporter and start it with systemd and tmux
   license: "MIT"
   min_ansible_version: "2.12"
+  # noqa schema
+  github_branch: 'main'
   platforms:
     - name: ArchLinux
       versions:
