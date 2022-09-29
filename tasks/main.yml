@@ -1,27 +1,27 @@
 ---
-- name: include optional versionscheck
+- name: Include optional versionscheck
   ansible.builtin.include_tasks: versioncheck.yml
-  when: submodules_versioncheck|bool
+  when: submodules_versioncheck | bool
 
-- name: try to get openstack-exporter version
+- name: Try to get openstack-exporter version
   ansible.builtin.shell: "set -eo pipefail; /usr/local/bin/openstack-exporter --version 2>&1 | cut -d' ' -f 3 | head -1"
   args:
     executable: /bin/bash
   register: openstack_exporter__active_version
   changed_when: false
   failed_when: false
-  when: openstack_exporter__version_check|bool
+  when: openstack_exporter__version_check | bool
 
-- name: create user and group
+- name: Create user and group
   ansible.builtin.include_tasks: users.yml
 
-- name: download and install openstack exporter
+- name: Download and install openstack exporter
   ansible.builtin.include_tasks: install.yml
 
-- name: deploy openstack config
+- name: Deploy openstack config
   ansible.builtin.include_tasks: config.yml
-  when: openstack_exporter__write_clouds_yaml|bool
+  when: openstack_exporter__write_clouds_yaml | bool
 
-- name: create systemd service
+- name: Create systemd service
   ansible.builtin.include_tasks: systemd.yml
-  when: openstack_exporter__systemd|bool
+  when: openstack_exporter__systemd | bool
