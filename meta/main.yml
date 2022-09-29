@@ -4,17 +4,20 @@ galaxy_info:
   author: do1jlr
   description: Ansible role to deploy a openstack-exporter and start it with systemd and tmux
   license: "MIT"
-  min_ansible_version: 2.10.6
-  github_branch: main
+  min_ansible_version: "2.12"
   platforms:
-    - name: Archlinux
-      versions: all
+    - name: ArchLinux
+      versions:
+        - all
     - name: Debian
-      versions: all
+      versions:
+        - all
     - name: Ubuntu
-      versions: all
+      versions:
+        - all
     - name: Fedora
-      versions: all
+      versions:
+        - all
   galaxy_tags:
     - prometheus
     - openstack
