@@ -1,5 +1,5 @@
 ---
-openstack_exporter__version: '1.3.0'
+openstack_exporter__version: '1.6.0'
 openstack_exporter__releases: "https://github.com/openstack-exporter/openstack-exporter/releases/download/v{{ openstack_exporter__version }}"
 openstack_exporter__filename: "openstack-exporter-{{ openstack_exporter__version }}.linux-{{ _arch }}"
 openstack_exporter__checksum: 'sha256sums.txt'
