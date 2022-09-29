@@ -36,7 +36,7 @@ By default the clouds: content will be deployed to ``/etc/openstack/clouds.yaml`
 
 | vaiable name | default value | description |
 | ------------ | ------------- | ----------- |
-| openstack_exporter__version: | ``'1.3.0'`` | the current used version of the openstack_exporter |
+| openstack_exporter__version: | ``'1.6.0'`` | the current used version of the openstack_exporter |
 | openstack_exporter__releases: | *(see [defaults/main.yml](defaults/main.yml))* | the Download path of the released go binary |
 | openstack_exporter__filename: | "openstack-exporter-{{ openstack_exporter__version }}.linux-{{ _arch }}" | the filename used to find and store the binary |
 | openstack_exporter__checksum: | 'sha256sums.txt' | The filename of the sha256sums of the released binarys |
