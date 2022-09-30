@@ -6,7 +6,7 @@
       ansible.builtin.get_url:
         url: "{{ openstack_exporter__releases }}/{{ openstack_exporter__filename }}.tar.gz"
         dest: "/tmp/{{ openstack_exporter__filename }}.tar.gz"
-        checksum: "sha256:{{ openstack_exporter__releases }}/{{ openstack_exporter__checksum }}"
+        # checksum: "sha256:{{ openstack_exporter__releases }}/{{ openstack_exporter__checksum }}"
         mode: 0640
       register: _download_archive
       until: _download_archive is succeeded
@@ -34,7 +34,7 @@
     - name: Deploy new openstack_exporter binary
       become: true
       ansible.builtin.copy:
-        src: "/opt/openstack-exporter/{{ openstack_exporter__filename }}/openstack-exporter"
+        src: "/opt/openstack-exporter/openstack-exporter"
         remote_src: true
         dest: '/usr/local/bin/openstack-exporter'
         owner: "{{ openstack_exporter__user }}"
