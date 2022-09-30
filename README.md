@@ -46,6 +46,7 @@ By default the clouds: content will be deployed to ``/etc/openstack/clouds.yaml`
 | openstack_exporter__cloud_name: | 'default' | For single cloud the name of the cloud *(from clouds dict)* |
 | openstack_exporter__write_clouds_yaml: | ``true`` | deploy the ``/etc/openstack/clouds.yaml`` with this ansible role |
 | openstack_exporter__port: | ``9123`` | port we use to listen for the openstack exporter |
+| openstack_exporter__cloud_telemetry_path: | '/metrics' | metric path |
 | openstack_exporter__no_log: | ``true`` | hide secrets from log |
 | openstack_exporter__extra_arguments: | '' | optional additional parameter to start openstack-exporter with |
 | openstack_exporter__os_user_domain_id: | 'default' | os_user_domain_id variable |

@@ -16,6 +16,7 @@ openstack_exporter__clouds:
 
 openstack_exporter__cloud_name: 'default'
 openstack_exporter__multicloud: false
+openstack_exporter__cloud_telemetry_path: '/metrics'
 
 openstack_exporter__write_clouds_yaml: true
 openstack_exporter__port: 9123
