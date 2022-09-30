@@ -8,7 +8,7 @@ After=network-online.target
 Type=simple
 User={{ openstack_exporter__user }}
 Group={{ openstack_exporter__group }}
-ExecStart=/usr/local/bin/openstack-exporter --os-client-config="/etc/openstack/clouds.yaml" --web.listen-address=":{{ openstack_exporter__port | default(9180) }}" --web.telemetry-path="{{ openstack_exporter__cloud_telemetry_path }}" -prefix="{{ openstack_exporter__cloud_prefix }}"
+ExecStart=/usr/local/bin/openstack-exporter --os-client-config="/etc/openstack/clouds.yaml" --web.listen-address=":{{ openstack_exporter__port | default(9180) }}" --web.telemetry-path="{{ openstack_exporter__cloud_telemetry_path }}" -prefix="{{ openstack_exporter__cloud_prefix }}" {{ openstack_exporter__extra_arguments }}
   {%- if openstack_exporter__multicloud | bool %} --multi-cloud
   {%- else %} {{ openstack_exporter__cloud_name }}
   {%- endif %}
