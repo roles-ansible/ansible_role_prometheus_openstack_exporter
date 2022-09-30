@@ -5,8 +5,6 @@ ansible_role_prometheus_openstack_exporter
 ============================================
 Ansible role to deploy the [https://github.com/openstack-exporter/openstack-exporter.git](https://github.com/openstack-exporter/openstack-exporter.git).
 
-Theoretically, the exporter should run in a Systemd session without much effort. But since I somehow didn't get that error free it is now nested in a tmux session. A bit ugly, but at least it works.
-
 Improvements are very very welcome!
 
  What do you need to get it running?
