@@ -14,8 +14,11 @@ openstack_exporter__systemd: true
 openstack_exporter__clouds:
   clouds: {}
 
+openstack_exporter__cloud_name: 'default'
+openstack_exporter__multicloud: false
+
 openstack_exporter__write_clouds_yaml: true
-openstack_exporter__first_port: 9123
+openstack_exporter__port: 9123
 openstack_exporter__no_log: true
 
 openstack_exporter__extra_arguments: ''

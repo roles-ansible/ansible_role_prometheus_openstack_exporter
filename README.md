@@ -43,9 +43,11 @@ By default the clouds: content will be deployed to ``/etc/openstack/clouds.yaml`
 | openstack_exporter__group: | 'openstackexporter' | The group to run the openstacl_exporter with |
 | openstack_exporter__version_check: | ``true`` | Check if installed version != ``openstack_exporter__version`` before initiating binary download |
 | openstack_exporter__systemd: | ``true`` | run systemd tasks *(currently the only option)* |
+| openstack_exporter__multicloud: | false | To enable multicloud mode set it to true |
 | openstack_exporter__clouds:  | ``clouds: {}`` | as described earlier the variable for the openstack clouds.yaml config |
+| openstack_exporter__cloud_name: | 'default' | For single cloud the name of the cloud *(from clouds dict)* |
 | openstack_exporter__write_clouds_yaml: | ``true`` | deploy the ``/etc/openstack/clouds.yaml`` with this ansible role |
-| openstack_exporter__first_port: | ``9123`` | first port we use to listen for the openstack exporter *(off by 1)* |
+| openstack_exporter__port: | ``9123`` | port we use to listen for the openstack exporter |
 | openstack_exporter__no_log: | ``true`` | hide secrets from log |
 | openstack_exporter__extra_arguments: | '' | optional additional parameter to start openstack-exporter with |
 | openstack_exporter__os_user_domain_id: | 'default' | os_user_domain_id variable |
