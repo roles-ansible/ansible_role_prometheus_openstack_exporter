@@ -40,9 +40,3 @@
         owner: "{{ openstack_exporter__user }}"
         group: "{{ openstack_exporter__group }}"
         mode: '0755'
-
-- name: Install tmux
-  become: true
-  ansible.builtin.package:
-    name: tmux
-    state: present

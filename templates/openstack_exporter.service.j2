@@ -12,6 +12,7 @@ ExecStart=/usr/local/bin/openstack-exporter --os-client-config="/etc/openstack/c
   {%- if openstack_exporter__multicloud | bool %} --multi-cloud
   {%- else %} {{ openstack_exporter__cloud_name }}
   {%- endif %}
+{{ "\n" }}
 Restart=always
 RestartSec=1
 
