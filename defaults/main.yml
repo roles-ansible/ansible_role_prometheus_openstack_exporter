@@ -1,8 +1,8 @@
 ---
 openstack_exporter__version: '1.6.0'
 openstack_exporter__releases: "https://github.com/openstack-exporter/openstack-exporter/releases/download/v{{ openstack_exporter__version }}"
-openstack_exporter__filename: "openstack-exporter-{{ openstack_exporter__version }}.linux-{{ _arch }}"
-openstack_exporter__checksum: 'sha256sums.txt'
+openstack_exporter__filename: "openstack-exporter_{{ openstack_exporter__version }}_linux_{{ _arch }}"
+openstack_exporter__checksum: "openstack-exporter_{{ openstack_exporter__version }}_checksums.txt"
 
 openstack_exporter__user: 'openstackexporter'
 openstack_exporter__group: 'openstackexporter'
@@ -14,8 +14,11 @@ openstack_exporter__systemd: true
 openstack_exporter__clouds:
   clouds: {}
 
+openstack_exporter__cloud_name: 'default'
+openstack_exporter__multicloud: false
+
 openstack_exporter__write_clouds_yaml: true
-openstack_exporter__first_port: 9123
+openstack_exporter__port: 9123
 openstack_exporter__no_log: true
 
 openstack_exporter__extra_arguments: ''

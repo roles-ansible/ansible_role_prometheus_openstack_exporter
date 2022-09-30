@@ -2,8 +2,7 @@
 - name: Systemctl restart openstack_exporter
   become: true
   ansible.builtin.systemd:
-    name: "openstack_exporter@{{ item['project'] }}.service"
+    name: "openstack_exporter.service"
     state: 'restarted'
     daemon_reload: true
-  with_items: "{{ openstack_exporter__projects }}"
   when: openstack_exporter__systemd | bool

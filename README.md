@@ -5,8 +5,6 @@ ansible_role_prometheus_openstack_exporter
 ============================================
 Ansible role to deploy the [https://github.com/openstack-exporter/openstack-exporter.git](https://github.com/openstack-exporter/openstack-exporter.git).
 
-Theoretically, the exporter should run in a Systemd session without much effort. But since I somehow didn't get that error free it is now nested in a tmux session. A bit ugly, but at least it works.
-
 Improvements are very very welcome!
 
  What do you need to get it running?
@@ -39,14 +37,15 @@ By default the clouds: content will be deployed to ``/etc/openstack/clouds.yaml`
 | openstack_exporter__version: | ``'1.6.0'`` | the current used version of the openstack_exporter |
 | openstack_exporter__releases: | *(see [defaults/main.yml](defaults/main.yml))* | the Download path of the released go binary |
 | openstack_exporter__filename: | "openstack-exporter-{{ openstack_exporter__version }}.linux-{{ _arch }}" | the filename used to find and store the binary |
-| openstack_exporter__checksum: | 'sha256sums.txt' | The filename of the sha256sums of the released binarys |
 | openstack_exporter__user: | 'openstackexporter' | The user to run the openstack_exporter with |
 | openstack_exporter__group: | 'openstackexporter' | The group to run the openstacl_exporter with |
 | openstack_exporter__version_check: | ``true`` | Check if installed version != ``openstack_exporter__version`` before initiating binary download |
 | openstack_exporter__systemd: | ``true`` | run systemd tasks *(currently the only option)* |
+| openstack_exporter__multicloud: | false | To enable multicloud mode set it to true |
 | openstack_exporter__clouds:  | ``clouds: {}`` | as described earlier the variable for the openstack clouds.yaml config |
+| openstack_exporter__cloud_name: | 'default' | For single cloud the name of the cloud *(from clouds dict)* |
 | openstack_exporter__write_clouds_yaml: | ``true`` | deploy the ``/etc/openstack/clouds.yaml`` with this ansible role |
-| openstack_exporter__first_port: | ``9123`` | first port we use to listen for the openstack exporter *(off by 1)* |
+| openstack_exporter__port: | ``9123`` | port we use to listen for the openstack exporter |
 | openstack_exporter__no_log: | ``true`` | hide secrets from log |
 | openstack_exporter__extra_arguments: | '' | optional additional parameter to start openstack-exporter with |
 | openstack_exporter__os_user_domain_id: | 'default' | os_user_domain_id variable |
