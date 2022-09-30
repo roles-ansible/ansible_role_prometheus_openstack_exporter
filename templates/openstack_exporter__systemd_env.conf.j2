@@ -1,7 +1,0 @@
-{{ ansible_managed | comment }}
-
-[Service]
-Environment="OPENSTACK_EXPORTER__PROJECT_NAME={{ item['project'] }}"
-Environment="OPENSTACK_EXPORTER__PROJECT_PORT={{ item['port'] }}"
-Environment="OS_USER_DOMAIN_ID={{ openstack_exporter__os_user_domain_id }}"
-Environment="OS_PROJECT_DOMAIN_ID={{ openstack_exporter__os_project_domain_id }}"
